@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hindi Voice Website</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      font-size: 18px;
+      padding: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      margin-top: 15px;
+      background: #0a7cff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>✍️ Hindi Likho – 🔊 Awaaz Suno</h2>
+
+<textarea id="text" placeholder="Yahan Hindi mein likho..."></textarea>
+
+<button onclick="bolna()">🔊 Sunao</button>
+
+<script>
+function bolna() {
+  let text = document.getElementById("text").value;
+  if(text === "") {
+    alert("Kuchh likho pehle");
+    return;
+  }
+
+  let speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "hi-IN";
+  speech.rate = 0.9;
+  speech.pitch = 1;
+
+  let voices = speechSynthesis.getVoices();
+  for(let i = 0; i < voices.length; i++) {
+    if(voices[i].lang === "hi-IN") {
+      speech.voice = voices[i];
+      break;
+    }
+  }
+
+  window.speechSynthesis.speak(speech);
+}
+</script>
+
+</body>
+</html>
